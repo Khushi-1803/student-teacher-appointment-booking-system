@@ -7,10 +7,10 @@ import adminRouter from './routes/adminRoute.js';
 import teacherRouter from './routes/teacherRoute.js';
 import userRouter from './routes/userRoute.js';
 
-// Create Express app
 const app = express();
+const PORT = process.env.PORT || 5000;
 
-// DB & Cloudinary Connections (run only once)
+// DB & Cloudinary
 connectDB();
 connectCloudinary();
 
@@ -29,5 +29,12 @@ app.get('/', (req, res) => {
   res.send('API WORKING');
 });
 
-// ✅ Instead of app.listen, export the app for Vercel
+// Local dev server
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server running locally on port ${PORT}`);
+  });
+}
+
+// Export for Vercel
 export default app;
