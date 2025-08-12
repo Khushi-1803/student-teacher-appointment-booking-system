@@ -129,7 +129,7 @@ const Teachers = () => {
               key={index}
               className=" border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all  duration-500"
             >
-              <img className="rounded-xl h-48 w-80" src={item.image} alt="" />
+              <img className="rounded-xl h-48 w-96" src={item.image} alt="" />
               <div className="p-4">
                 <div
                   className={`flex  gap-2 text-sm text-center ${
