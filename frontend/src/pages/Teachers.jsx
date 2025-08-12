@@ -9,12 +9,12 @@ const Teachers = () => {
   const [showFilter, setShowFilter] = useState(false);
 
   const navigate = useNavigate();
-
   const { teachers } = useContext(AppContext);
   const applyfilter = () => {
     if (speciality) {
       setFilterTeacher(
         teachers.filter((teachers) => teachers.speciality === speciality)
+        
       );
     } else {
       setFilterTeacher(teachers);
@@ -23,7 +23,12 @@ const Teachers = () => {
 
   useEffect(() => {
     applyfilter();
-  }, [teachers, speciality]);
+  }, [teachers,speciality]);
+
+  useEffect(() => {
+    // Log the specialities for debugging
+    console.log("Teacher specialities:", teachers.map(t => `"${t.speciality}"`));
+  }, [teachers]);
 
   return (
     <div>
@@ -124,7 +129,7 @@ const Teachers = () => {
               key={index}
               className=" border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all  duration-500"
             >
-              <img className="rounded-xl h-48" src={item.image} alt="" />
+              <img className="rounded-xl h-48 w-80" src={item.image} alt="" />
               <div className="p-4">
                 <div
                   className={`flex  gap-2 text-sm text-center ${

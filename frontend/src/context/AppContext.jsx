@@ -1,11 +1,12 @@
 import { createContext, useEffect, useState } from "react";
-// import { teachers } from "../assets/app";
+import { teachers } from "../assets/app";
 import axios from "axios";
 export const AppContext = createContext();
 import { toast } from "react-toastify";
 
 const AppContextProvider = (props) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  
 
   const [teachers, setTeachers] = useState([]);
 
@@ -17,7 +18,11 @@ const AppContextProvider = (props) => {
 
   const getTeachersData = async () => {
     try {
-      const { data } = await axios.get(backendUrl + "/api/teacher/list");
+      const { data } = await axios.get(backendUrl + "/api/teacher/list",{
+         headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (data.success) {
         setTeachers(data.teachers);
       } else {
@@ -73,3 +78,4 @@ const AppContextProvider = (props) => {
 };
 
 export default AppContextProvider;
+

@@ -30,11 +30,15 @@ app.get('/', (req, res) => {
 });
 
 // Local dev server
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`Server running locally on port ${PORT}`);
-  });
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   app.listen(PORT, () => {
+//     console.log(`Server running locally on port ${PORT}`);
+//   });
+// }
+app.listen(PORT, () => {
+  console.log(`Server running locally on port ${PORT}`);
+});
+
 
 // Export for Vercel
 export default app;

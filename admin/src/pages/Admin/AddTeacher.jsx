@@ -129,7 +129,7 @@ const AddTeacher = () => {
                 <option value="Chemistry">Chemistry</option>
                 <option value="Maths">Maths</option>
                 <option value="Biology">Biology</option>
-                <option value="Engish">Engish</option>
+                <option value="English">English</option>
                 <option value="Hindi">Hindi</option>
               </select>
             </div>
