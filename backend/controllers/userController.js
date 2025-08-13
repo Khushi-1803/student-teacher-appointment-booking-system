@@ -481,63 +481,16 @@ const bookAppointment = async (req, res) => {
 };
 
 // api to get user appointment for frontend my-appointment page
-// const listAppointment = async (req, res) => {
-//   try {
-//     const userId = req.userId;
-//     const appointments = await appointmentModel.find({ userId }).sort({ date: -1 });
-//     return res.json({ success: true, appointments });
-//   } catch (error) {
-//     console.error("listAppointment error:", error);
-//     return res.status(500).json({ success: false, message: error.message });
-//   }
-// };
-
 const listAppointment = async (req, res) => {
   try {
     const userId = req.userId;
-
-    // Find all appointments for the user, sort latest first
-    const appointments = await appointmentModel
-      .find({ userId })
-      .populate("teacherId") // populate live teacher data if exists
-      .sort({ date: -1 });
-
-    // Prepare formatted appointments
-    const formattedAppointments = appointments.map(app => {
-      // Live teacher data (if still exists in DB)
-      const teacherLive = app.teacherId ? app.teacherId.toObject() : {};
-
-      // Snapshot stored in appointment at the time of booking
-      const teacherSnapshot = app.teacherData || {};
-
-      // Merge snapshot first, then overwrite with live teacher data if present
-      const teacher = {
-        ...teacherSnapshot,
-        ...teacherLive
-      };
-
-      // Always provide an image (fallback if none found)
-      if (!teacher.image) {
-        teacher.image = "/default-teacher.png"; // Change to your default image path
-      }
-
-      return {
-        _id: app._id,
-        date: app.date,
-        status: app.status,
-        teacher
-      };
-    });
-
-    return res.json({ success: true, appointments: formattedAppointments });
-
+    const appointments = await appointmentModel.find({ userId }).sort({ date: -1 });
+    return res.json({ success: true, appointments });
   } catch (error) {
     console.error("listAppointment error:", error);
     return res.status(500).json({ success: false, message: error.message });
   }
 };
-
-export default listAppointment;
 
 
 
