@@ -81,7 +81,7 @@ const loginTeacher = async (req, res) => {
 const appointmentsTeacher = async (req, res) => {
   try {
     const teacherId = req.teacherId; //not req.body
-    const appointments = await appointmentModel.find({ teacherId });
+    const appointments = await appointmentModel.find({ teacherId }).populate("teacherId", "name speciality address image fees");
 
     res.json({ success: true, appointments });
   } catch (error) {
