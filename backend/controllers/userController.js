@@ -438,7 +438,7 @@ const bookAppointment = async (req, res) => {
       } else {
         slotes_booked[slotDate].push(slotTime);
       }
-    } else {
+    } else {  
       slotes_booked[slotDate] = [slotTime];
     }
 
@@ -452,6 +452,7 @@ const bookAppointment = async (req, res) => {
       _id: teacherData._id,
       name: teacherData.name,
       fees: teacherData.fees,
+      image: teacherData.image
       // add other public fields you want to snapshot
     };
 
