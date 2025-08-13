@@ -120,7 +120,7 @@ export const teachers = [
     degree: "MEd",
     experience: "10 years",
     about: "With a deep passion for science and over [X] years of teaching experience, I am dedicated to making chemistry engaging, accessible, and meaningful for all students. My goal is to inspire curiosity and critical thinking by connecting classroom concepts to real-world applications.",
-    fees: "₹800/hour",
+    fees: "₹1/hour",
     address: "Lajpat Nagar",
     speciality: "Chemistry"
   },
@@ -230,7 +230,7 @@ export const teachers = [
     degree: "BSC",
     experience: "5 years",
     about: "Hi there! I am a biology teacher who loves helping students explore the amazing complexity of life. Whether we are learning about the human body, genetics, or the environment, I believe science should be interactive, exciting, and easy to relate to. I create a supportive and inclusive classroom where students feel comfortable asking questions and thinking like scientists.",
-    fees: "₹750/hour",
+    fees: "₹1/hour",
     address: "Kochi",
     speciality: "Biology"
   },

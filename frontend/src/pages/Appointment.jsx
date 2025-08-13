@@ -125,7 +125,7 @@ const Appointment = () => {
   return teacherInfo && (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-16">
       {/* Doctor/Teacher Details */}
-      <div className='flex flex-col sm:flex-row gap-4 mt-6'>
+      <div className='flex flex-col md:flex-row gap-4 mt-6 '>
         <div>
           <img
             className='w-full h-48 sm:h-52 md:max-w-72 rounded-lg object-cover'
@@ -134,7 +134,9 @@ const Appointment = () => {
           />
         </div>
 
-        <div className='flex-1 border border-gray-400 rounded-lg p-4 sm:p-8 py-6 sm:py-7 bg-white h-auto sm:h-52 mt-4 sm:mt-0'>
+        {/* <div className='flex-1 border border-gray-400 rounded-lg p-4 pb-2 bg-purple-950 h-96 sm:h-52 mt-4 sm:mt-0'> */}
+        <div className="flex-1 border border-gray-400 rounded-lg p-4 pb-2 bg-white min-h-52 md:min-h-72 lg:min-h-60 mt-4 sm:mt-0">
+
           <p className='flex items-center gap-2 text-lg sm:text-2xl font-medium text-gray-900'>
             {teacherInfo.name}
             <img className='w-4 sm:w-5' src={assets.verified_icon} alt="" />
