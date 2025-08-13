@@ -481,16 +481,54 @@ const bookAppointment = async (req, res) => {
 };
 
 // api to get user appointment for frontend my-appointment page
+// const listAppointment = async (req, res) => {
+//   try {
+//     const userId = req.userId;
+//     const appointments = await appointmentModel.find({ userId }).sort({ date: -1 });
+//     return res.json({ success: true, appointments });
+//   } catch (error) {
+//     console.error("listAppointment error:", error);
+//     return res.status(500).json({ success: false, message: error.message });
+//   }
+// };
+
 const listAppointment = async (req, res) => {
   try {
     const userId = req.userId;
-    const appointments = await appointmentModel.find({ userId }).sort({ date: -1 });
-    return res.json({ success: true, appointments });
+
+    const appointments = await appointmentModel
+      .find({ userId })
+      .sort({ date: -1 })
+      .populate("teacherId", "-password -slots_booked -__v") // current teacher data
+      .populate("userId", "-password -__v"); // current user data
+
+    // Combine both snapshot & fresh data for clarity
+    const formattedAppointments = appointments.map(app => ({
+      _id: app._id,
+      date: app.date,
+      slotDate: app.slotDate,
+      slotTime: app.slotTime,
+      amount: app.amount,
+      cancelled: app.cancelled,
+      isCompleted: app.isCompleted,
+      payment: app.payment,
+
+      // snapshot saved at booking time
+      teacherSnapshot: app.teacherData,
+      userSnapshot: app.userData,
+
+      // latest data from DB
+      teacherLive: app.teacherId,
+      userLive: app.userId,
+    }));
+
+    return res.json({ success: true, appointments: formattedAppointments });
   } catch (error) {
     console.error("listAppointment error:", error);
     return res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 // api for cancel appointment
 const cancelAppointment = async (req, res) => {
