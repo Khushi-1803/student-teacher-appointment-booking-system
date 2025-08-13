@@ -18,18 +18,42 @@ const changeAvailability = async (req, res) => {
   }
 };
 
+// const teacherList = async (req, res) => {
+//   try {
+//     const teachers = await teacherModel
+//       .find({})
+//       .select(["-password", "-email"]);
+//     res.json({ success: true, teachers });
+//   } catch (error) {
+//     console.log(error);
+//     res.json({ success: false, message: error.message });
+//   }
+// };
+//api for teacher login
 const teacherList = async (req, res) => {
   try {
     const teachers = await teacherModel
       .find({})
       .select(["-password", "-email"]);
-    res.json({ success: true, teachers });
+
+    const backendUrl = process.env.BACKEND_URL; // e.g., https://myapp-backend.onrender.com
+
+    const updatedTeachers = teachers.map(teacher => {
+      const t = teacher.toObject();
+      if (t.image && !t.image.startsWith("http")) {
+        t.image = `${backendUrl}/${t.image}`;
+      }
+      return t;
+    });
+
+    res.json({ success: true, teachers: updatedTeachers });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
-//api for teacher login
+
+
 const loginTeacher = async (req, res) => {
   try {
     const { email, password } = req.body;

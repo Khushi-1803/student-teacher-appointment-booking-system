@@ -152,7 +152,7 @@ const initPay = (order, appointmentId) => {
           <div className='grid grid-cols-[1fr_2fr] gap-4 sm:flex sm:gap-6 py-2 border-b' key={index}>
 
             <div>
-              <img className='w-60'  src={item.teacherData.image} alt="" />
+              <img className='w-60'  src={`${process.env.VITE_BACKEND_URL}/${item.teacherData.image}`} alt="" />
             </div>
 
             <div className='flex-1 text-sm text-zinc-600'>

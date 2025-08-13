@@ -7,7 +7,7 @@ import {
   appointmentCancel,
   teacherDashboard,
   teacherProfile,
-  updateTeacherProfile,
+  updateTeacherProfile,  
 } from "../controllers/teacherController.js";
 import authTeacher from "../middlewares/authTeacher.js";
 
