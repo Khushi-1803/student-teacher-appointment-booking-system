@@ -496,38 +496,50 @@ const listAppointment = async (req, res) => {
   try {
     const userId = req.userId;
 
+    // Find all appointments for the user, sort latest first
     const appointments = await appointmentModel
       .find({ userId })
-      .sort({ date: -1 })
-      .populate("teacherId", "-password -slots_booked -__v") // current teacher data
-      .populate("userId", "-password -__v"); // current user data
+      .populate("teacherId") // populate live teacher data if exists
+      .sort({ date: -1 });
 
-    // Combine both snapshot & fresh data for clarity
-    const formattedAppointments = appointments.map(app => ({
-      _id: app._id,
-      date: app.date,
-      slotDate: app.slotDate,
-      slotTime: app.slotTime,
-      amount: app.amount,
-      cancelled: app.cancelled,
-      isCompleted: app.isCompleted,
-      payment: app.payment,
+    // Prepare formatted appointments
+    const formattedAppointments = appointments.map(app => {
+      // Live teacher data (if still exists in DB)
+      const teacherLive = app.teacherId ? app.teacherId.toObject() : {};
 
-      // snapshot saved at booking time
-      teacherSnapshot: app.teacherData,
-      userSnapshot: app.userData,
+      // Snapshot stored in appointment at the time of booking
+      const teacherSnapshot = app.teacherData || {};
 
-      // latest data from DB
-      teacherLive: app.teacherId,
-      userLive: app.userId,
-    }));
+      // Merge snapshot first, then overwrite with live teacher data if present
+      const teacher = {
+        ...teacherSnapshot,
+        ...teacherLive
+      };
+
+      // Always provide an image (fallback if none found)
+      if (!teacher.image) {
+        teacher.image = "/default-teacher.png"; // Change to your default image path
+      }
+
+      return {
+        _id: app._id,
+        date: app.date,
+        status: app.status,
+        teacher
+      };
+    });
 
     return res.json({ success: true, appointments: formattedAppointments });
+
   } catch (error) {
     console.error("listAppointment error:", error);
     return res.status(500).json({ success: false, message: error.message });
   }
 };
+
+export default listAppointment;
+
+
 
 
 // api for cancel appointment
