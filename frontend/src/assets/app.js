@@ -1,5 +1,5 @@
 
-import Logo from './Logo.jpg'
+import Logo from './Logo.png'
 import T1 from './T1.jpg'
 import T2 from './T2.jpg'
 import T3 from './T3.jpg'

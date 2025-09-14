@@ -59,7 +59,7 @@ const Login = () => {
           </p>
           {
             state === 'Sign Up' && <div className="text-start my-3 ">
-          <label className="font-medium  " >UserName</label> 
+          <label className="font-medium " >UserName</label> 
           <div className="left-0"><input
             type="text"
             onChange={(event) => setName(event.target.value)}
