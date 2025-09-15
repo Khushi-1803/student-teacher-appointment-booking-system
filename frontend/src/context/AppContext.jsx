@@ -5,7 +5,7 @@ export const AppContext = createContext();
 import { toast } from "react-toastify";
 
 const AppContextProvider = (props) => {
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
   
 
   const [teachers, setTeachers] = useState([]);
