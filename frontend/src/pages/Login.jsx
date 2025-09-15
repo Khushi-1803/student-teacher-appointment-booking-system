@@ -16,31 +16,64 @@ const Login = () => {
   let [password, setPassword] = useState("");
 
 
-  let onSubmitHandler = async(event) => {
-    event.preventDefault();
-    try {
-      if (state === 'Sign Up') {
-        const {data} = await axios.post(backendUrl + '/api/user/register',{name,password,email})
-        if (data.success) {
-          localStorage.setItem('token',data.token)
-          setToken(data.token)
-        }else{
-          toast.error(data.message)
-        }
-      }else{
-       const {data} = await axios.post(backendUrl + '/api/user/login',{password,email})
-        if (data.success) {
-          localStorage.setItem('token',data.token)
-          setToken(data.token)
-        }else{
-          toast.error(data.message)
-        } 
-      }
-    } catch (error) {
-      toast.error(error.message)
-    }
-  };
+  // let onSubmitHandler = async(event) => {
+  //   event.preventDefault();
+  //   try {
+  //     if (state === 'Sign Up') {
+  //       const {data} = await axios.post(backendUrl + '/api/user/register',{name,password,email})
+  //       if (data.success) {
+  //         localStorage.setItem('token',data.token)
+  //         setToken(data.token)
+  //       }else{
+  //         toast.error(data.message)
+  //       }
+  //     }else{
+  //      const {data} = await axios.post(backendUrl + '/api/user/login',{password,email})
+  //       if (data.success) {
+  //         localStorage.setItem('token',data.token)
+  //         setToken(data.token)
+  //       }else{
+  //         toast.error(data.message)
+  //       } 
+  //     }
+  //   } catch (error) {
+  //     toast.error(error.message)
+  //   }
+  // };
 
+   let onSubmitHandler = async(event) => {
+  event.preventDefault();
+  try {
+    if (state === 'Sign Up') {
+      const { data } = await axios.post(`${backendUrl}/api/user/register`, { name, password, email });
+      if (data.success) {
+        localStorage.setItem('token', data.token);
+        setToken(data.token);
+
+        // ✅ load user profile immediately
+        await loadUserProfileData();
+        navigate('/'); // redirect after successful sign-up
+      } else {
+        toast.error(data.message);
+      }
+    } else {
+      const { data } = await axios.post(`${backendUrl}/api/user/login`, { password, email });
+      if (data.success) {
+        localStorage.setItem('token', data.token);
+        setToken(data.token);
+
+        await loadUserProfileData();
+        navigate('/'); // redirect after login
+      } else {
+        toast.error(data.message);
+      }
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.message || error.message);
+  }
+};
+
+  
  useEffect(() => {
   setToken("");
   localStorage.removeItem("token");
