@@ -134,7 +134,7 @@ const Appointment = () => {
           />
         </div>
 
-        {/* <div className='flex-1 border border-gray-400 rounded-lg p-4 pb-2 bg-purple-950 h-96 sm:h-52 mt-4 sm:mt-0'> */}
+        
         <div className="flex-1 border border-gray-400 rounded-lg p-4 pb-2 bg-white min-h-52 md:min-h-72 lg:min-h-60 mt-4 sm:mt-0">
 
           <p className='flex items-center gap-2 text-lg sm:text-2xl font-medium text-gray-900'>

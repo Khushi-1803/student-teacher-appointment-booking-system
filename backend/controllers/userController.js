@@ -8,7 +8,7 @@ import { v2 as cloudinary } from "cloudinary";
 import teacherModel from "../models/teacherModel.js";
 import appointmentModel from "../models/appointmentModel.js";
 import Razorpay from "razorpay";
-import crypto from "crypto";
+
 
 
 

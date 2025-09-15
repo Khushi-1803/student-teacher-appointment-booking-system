@@ -11,8 +11,6 @@ const RelatedTeachers = ({speciality,teachersId}) => {
     if(teachers.length > 0 && speciality){
       const teachersData = teachers.filter((teachers)=>teachers.speciality === speciality && teachers._id !== teachersId)
       setRelatedTeachers(teachersData)
-      
-      
     }
 
   },[teachers,speciality,teachersId])

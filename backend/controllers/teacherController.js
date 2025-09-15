@@ -36,7 +36,7 @@ const teacherList = async (req, res) => {
       .find({})
       .select(["-password", "-email"]);
 
-    const backendUrl = process.env.BACKEND_URL; // e.g., https://myapp-backend.onrender.com
+    const backendUrl = process.env.BACKEND_URL;
 
     const updatedTeachers = teachers.map(teacher => {
       const t = teacher.toObject();

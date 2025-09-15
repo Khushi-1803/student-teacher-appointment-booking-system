@@ -56,25 +56,7 @@ const navigate = useNavigate()
     }
   }
 
-  // const initPay = (order) =>{
-  //   const options = {
-  //     key:import.meta.env.VITE_RAZORPAY_KEY_ID,
-  //     amount: order.amount,
-  //     currency: order.currency,
-  //     name:'Appointment Payment',
-  //     description:'Appointment Payment',
-  //     order_id: order._id,
-  //     receipt: order.receipt,
-  //     handler: async(response)=>{
-  //       console.log(response);
-        
-  //     }
-  //   } 
-  //   const rzp = new window.Razorpay(options)
-  //   rzp.open()
-  // } 
-
-  // function to make payment
+  
 
 const initPay = (order, appointmentId) => {
   const options = {
@@ -86,25 +68,7 @@ const initPay = (order, appointmentId) => {
     order_id: order.id, // use `order.id` from backend, not `_id`
     handler: async (response) => {
       console.log("Razorpay response:", response);
-      // try {
-      //   const verifyRes = await axios.post(
-      //     backendUrl + "/api/user/verify-payment",
-      //     {
-      //       ...response,
-      //       appointmentId
-      //     },
-      //     { headers: { Authorization: `Bearer ${token}` } }
-      //   );
-      //   if (verifyRes.data.success) {
-      //     toast.success("Payment successful!");
-      //     getUserAppointments();
-      //   } else {
-      //     toast.error("Payment verification failed");
-      //   }
-      // } catch (error) {
-      //   console.error(error);
-      //   toast.error("Error verifying payment");
-      // }
+      
       try {
         const {data} = await axios.post(backendUrl+'/api/user/verify-payment',response,{headers: { Authorization: `Bearer ${token}` }})
         if (data.success) {
@@ -134,9 +98,6 @@ const initPay = (order, appointmentId) => {
   }
 
 }
-
-
-
   useEffect(()=>{
     if (token) {
       getUserAppointments()
