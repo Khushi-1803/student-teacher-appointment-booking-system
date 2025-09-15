@@ -1,4 +1,4 @@
-import admin_logo from './admin_logo.jpg'
+import admin_logo from './admin_logo.png'
 import home_icon from './home_icon.png'
 import appointment_icon from './appointment_icon.png'
 import add_icon from './add_icon.png'

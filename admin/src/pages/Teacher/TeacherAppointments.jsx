@@ -17,7 +17,7 @@ const TeacherAppointments = () => {
     <div className='w-full max-w-6xl m-5'>
       <p className='mb-3 text-lg font-medium'>All Appointments</p>
       <div className='bg-white rounded text-sm max-h-[80vh] min-h-[50vh] overflow-y-scroll'>
-        <div className='max-sm:hidden grid grid-cols-[0.5fr_1fr_1fr_1fr_3fr_1fr_1fr]  gap-1 py-3 px-6 border-b '>
+        <div className='max-sm:hidden grid grid-cols-[0.5fr_1fr_1fr_1fr_3fr_1fr_1fr]  gap-12 py-3 px-6 border-b '>
           <p>#</p>
           <p>Student</p>
           <p>Payment</p>
@@ -29,16 +29,16 @@ const TeacherAppointments = () => {
         {
           appointments.map((item,index)=>(
             <div className='flex flex-wrap justify-between max-sm:gap-5 max-sm:text-base sm:grid grid-cols-[0.5fr_1fr_1fr_1fr_3fr_1fr_1fr] gap-1 items-center text-gray-500 py-3 px-6 border-b hover:bg-gray-100' key={index}>
-              <p className='max-sm:hidden'>{index+1}</p>
-              <div className='flex items-center gap-2'>
-                <img className='w-12 h-12 rounded-full' src={item.userData.image} alt="" /> <p>{item.userData.name}</p>
+              <p className='max-sm:hidden '>{index+1}</p>
+              <div className='flex items-center mr-20'>
+                <img className='w-12 h-12 rounded-full ml-5' src={item.userData.image} alt="" /> <p>{item.userData.name}</p>
               </div>
               <div>
                 <p className='text-xs inline border border-cyan-900 px-2 rounded-full'>
                   {item.payment ? 'online' : 'Cash'}
                 </p>
               </div>
-              <p className='max-sm:hidden'>class</p>
+              <p className='max-sm:hidden'>{item.userData.class}</p>
               <p>{slotDateFormat(item.slotDate)},{item.slotTime}</p>
               <p>₹{item.amount}</p>
 
