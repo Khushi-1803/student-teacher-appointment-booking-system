@@ -16,7 +16,7 @@ console.log("Backend URL in frontend build:", backendUrl);
   const [teachers, setTeachers] = useState([]);
 
   const [token, setToken] = useState(
-    localStorage.getItem("token") ? localStorage.getItem("token") : false
+    localStorage.getItem("token") ? localStorage.getItem("token") : ""
   );
 
   const [userData, setUserData] = useState(false);
