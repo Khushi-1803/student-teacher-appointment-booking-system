@@ -41,11 +41,11 @@ const Login = () => {
     }
   };
 
-  useEffect(()=>{
-    if(token){
-      navigate('/')
-    }
-  },[token])
+ useEffect(() => {
+  setToken("");
+  localStorage.removeItem("token");
+}, []);
+
 
   return (
     <div className=" items-center flex flex-col  mt-20">

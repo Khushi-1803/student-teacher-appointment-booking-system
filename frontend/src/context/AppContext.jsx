@@ -164,7 +164,7 @@ const AppContextProvider = (props) => {
     if (token) {
       loadUserProfileData();
     } else {
-      setUserData(false);
+      setUserData(false);   
     }
   }, [token]);
 
