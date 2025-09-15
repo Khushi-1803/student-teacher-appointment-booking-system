@@ -6,6 +6,11 @@ import { toast } from "react-toastify";
 
 const AppContextProvider = (props) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
+  // Inside AppContextProvider.js, just after defining backendUrl:
+
+
+console.log("Backend URL in frontend build:", backendUrl);
+
   
 
   const [teachers, setTeachers] = useState([]);
