@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
-  const{backendUrl,token,setToken} = useContext(AppContext)
+  const{backendUrl,token,setToken, loadUserProfileData} = useContext(AppContext)
   const navigate = useNavigate()
 
   const [state, setState] = useState("Sign Up");
