@@ -118,7 +118,7 @@ const initPay = (order, appointmentId) => {
 
             <div className='flex-1 text-sm text-zinc-600'>
               <p className=''><span className=' text-neutral-700 font-medium'> Name:</span> {item.teacherData.name}</p>
-              <p ><span className=' text-neutral-700 font-medium'>Speciality:</span> {item.teacherData.speciality}</p>
+              <p ><span className=' text-neutral-700 font-medium'>Speciality:</span> {item.teacherData.speciality}</p> 
               <p><span className=' text-neutral-700 font-medium'>Address:</span> {item.teacherData.address}</p>
               
               <p className=''><span className=' text-neutral-700 font-medium'>Date & Time: </span>{slotDateFormat(item.slotDate)} | {item.slotTime}</p>

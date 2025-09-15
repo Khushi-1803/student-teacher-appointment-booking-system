@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import axios from 'axios'
 import {toast} from 'react-toastify'
 export const AdminContext = createContext()
-// import {teachers} from "../../assets/app.js"
+
 
 const AdminContextProvider = (props) => {
     

@@ -190,7 +190,10 @@ const bookAppointment = async (req, res) => {
       _id: teacherData._id,
       name: teacherData.name,
       fees: teacherData.fees,
-      image: teacherData.image
+      image: teacherData.image,
+      _id: teacherData._id,
+      speciality: teacherData.speciality,
+       address: teacherData.address
       // add other public fields you want to snapshot
     };
 

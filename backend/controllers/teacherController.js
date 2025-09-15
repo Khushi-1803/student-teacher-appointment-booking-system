@@ -32,7 +32,7 @@ const changeAvailability = async (req, res) => {
 //api for teacher login
 const teacherList = async (req, res) => {
   try {
-    const teachers = await teacherModel
+    const teachers = await teacherModel 
       .find({})
       .select(["-password", "-email"]);
 
