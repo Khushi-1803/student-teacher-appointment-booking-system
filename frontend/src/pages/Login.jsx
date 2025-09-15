@@ -13,7 +13,7 @@ const Login = () => {
 
   let [email, setEmail] = useState("");
   let [name, setName] = useState("");
-  let [password, setPassword] = useState("");
+  let [password, setPassword] = useState(""); 
 
 
   // let onSubmitHandler = async(event) => {
@@ -74,10 +74,10 @@ const Login = () => {
 };
 
   
- useEffect(() => {
-  setToken("");
-  localStorage.removeItem("token");
-}, []);
+//  useEffect(() => {
+//   setToken("");
+//   localStorage.removeItem("token");
+// }, []);
 
 
   return (
