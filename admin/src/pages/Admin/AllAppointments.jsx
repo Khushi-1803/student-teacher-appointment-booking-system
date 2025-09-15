@@ -32,7 +32,7 @@ const AllAppointments = () => {
           <div className='flex items-center gap-2'>
             <img className='w-12 h-12 rounded-full' src={item.userData.image} alt=" "/> <p>{item.userData.name}</p>
           </div>
-           <p className='max-sm:hidden'></p>
+          <p className='max-sm:hidden'>{item.userData.class}</p>
           <p>{slotDateFormat(item.slotDate)},{item.slotTime}</p>
            <div className='flex items-center gap-2'>
             <img className='w-12 h-12 rounded-full' src={item.teacherData.image} alt=" "/> <p>{item.teacherData.name}</p>

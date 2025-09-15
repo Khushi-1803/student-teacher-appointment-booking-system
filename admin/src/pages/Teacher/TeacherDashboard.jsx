@@ -65,7 +65,7 @@ const TeacherDashboard = () => {
                 />
                 <div className="flex-1 test-sm">
                   <p className="text-gray-800 font-medium ">
-                    {item.userData.name}
+                    {item.userId.name}
                   </p>
                   <p className="text-gray-600 ">
                     {slotDateFormat(item.slotDate)}

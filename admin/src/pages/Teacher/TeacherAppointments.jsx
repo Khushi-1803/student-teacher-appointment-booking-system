@@ -34,11 +34,12 @@ const TeacherAppointments = () => {
                 <img className='w-12 h-12 rounded-full ml-5' src={item.userData.image} alt="" /> <p>{item.userData.name}</p>
               </div>
               <div>
-                <p className='text-xs inline border border-cyan-900 px-2 rounded-full'>
-                  {item.payment ? 'online' : 'Cash'}
+                <p className='text-xs inline border border-cyan-900 px-2 rounded-full ml-8'>
+                  {item.payment ? 'online' : '-'}
                 </p>
+                
               </div>
-              <p className='max-sm:hidden'>{item.userData.class}</p>
+              <p className='max-sm:hidden ml-8'>{item.userData.class}</p>
               <p>{slotDateFormat(item.slotDate)},{item.slotTime}</p>
               <p>₹{item.amount}</p>
 

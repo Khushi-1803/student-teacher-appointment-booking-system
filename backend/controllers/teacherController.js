@@ -132,7 +132,7 @@ const appointmentCancel = async (req, res) => {
 const teacherDashboard = async (req, res) => {
   try {
     const teacherId = req.teacherId;
-    const appointments = await appointmentModel.find({ teacherId });
+    const appointments = await appointmentModel.find({ teacherId }) .populate("userId", "name image");
 
     let students = [];
     appointments.map((item) => {
