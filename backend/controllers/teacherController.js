@@ -18,18 +18,6 @@ const changeAvailability = async (req, res) => {
   }
 };
 
-// const teacherList = async (req, res) => {
-//   try {
-//     const teachers = await teacherModel
-//       .find({})
-//       .select(["-password", "-email"]);
-//     res.json({ success: true, teachers });
-//   } catch (error) {
-//     console.log(error);
-//     res.json({ success: false, message: error.message });
-//   }
-// };
-//api for teacher login
 const teacherList = async (req, res) => {
   try {
     const teachers = await teacherModel 
