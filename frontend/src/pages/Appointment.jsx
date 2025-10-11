@@ -25,56 +25,116 @@ const Appointment = () => {
     setTeacherInfo(teacherInfo)
   }
 
+  // const getAvailableSlots = async () => {
+  //   setTeacherSlot([])
+  //   let today = new Date()
+
+  //   for (let i = 0; i < 7; i++) {
+  //     let currentDate = new Date(today)
+  //     currentDate.setDate(today.getDate() + i)
+
+  //     let endTime = new Date()
+  //     endTime.setDate(today.getDate() + i)
+  //     endTime.setHours(21, 0, 0, 0)
+
+  //     if (today.getDate() === currentDate.getDate()) {
+  //       currentDate.setHours(currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10)
+  //       currentDate.setMinutes(currentDate.getMinutes() > 30 ? 30 : 0)
+  //     } else {
+  //       currentDate.setHours(10)
+  //       currentDate.setMinutes(0)
+  //     }
+
+  //     let timeSlots = []
+
+  //     while (currentDate < endTime) {
+  //       let formattedTime = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+
+  //       let day = currentDate.getDate()
+  //       let month = currentDate.getMonth() + 1
+  //       let year = currentDate.getFullYear()
+
+  //       const slotDate = day + "_" + month + "_" + year
+  //       const slotTime = formattedTime
+
+  //       const isSlotAvailable = teacherInfo.slotes_booked[slotDate] &&
+  //         teacherInfo.slotes_booked[slotDate].includes(slotTime)
+  //         ? false
+  //         : true
+
+  //       if (isSlotAvailable) {
+  //         timeSlots.push({
+  //           dateTime: new Date(currentDate),
+  //           time: formattedTime
+  //         })
+  //       }
+
+  //       currentDate.setMinutes(currentDate.getMinutes() + 30)
+  //     }
+
+  //     setTeacherSlot(prev => ([...prev, timeSlots]))
+  //   }
+  // }
   const getAvailableSlots = async () => {
-    setTeacherSlot([])
-    let today = new Date()
+  setTeacherSlot([])
+  let today = new Date()
 
-    for (let i = 0; i < 7; i++) {
-      let currentDate = new Date(today)
-      currentDate.setDate(today.getDate() + i)
+  for (let i = 0; i < 7; i++) {
+    let currentDate = new Date(today)
+    currentDate.setDate(today.getDate() + i)
 
-      let endTime = new Date()
-      endTime.setDate(today.getDate() + i)
-      endTime.setHours(21, 0, 0, 0)
+    let endTime = new Date()
+    endTime.setDate(today.getDate() + i)
+    endTime.setHours(21, 0, 0, 0) // 9 PM end time
 
-      if (today.getDate() === currentDate.getDate()) {
-        currentDate.setHours(currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10)
-        currentDate.setMinutes(currentDate.getMinutes() > 30 ? 30 : 0)
-      } else {
-        currentDate.setHours(10)
-        currentDate.setMinutes(0)
-      }
+    // ✅ Updated starting time logic for hourly slots
+    if (today.getDate() === currentDate.getDate()) {
+      // If today → start one hour after current time OR at 10 AM (whichever is later)
+      const nextHour = currentDate.getHours() + 1
+      currentDate.setHours(nextHour > 10 ? nextHour : 10)
+      currentDate.setMinutes(0)
+    } else {
+      // For upcoming days → always start at 10 AM
+      currentDate.setHours(10)
+      currentDate.setMinutes(0)
+    }
 
-      let timeSlots = []
+    let timeSlots = []
 
-      while (currentDate < endTime) {
-        let formattedTime = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    while (currentDate < endTime) {
+      let formattedTime = currentDate.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      })
 
-        let day = currentDate.getDate()
-        let month = currentDate.getMonth() + 1
-        let year = currentDate.getFullYear()
+      let day = currentDate.getDate()
+      let month = currentDate.getMonth() + 1
+      let year = currentDate.getFullYear()
 
-        const slotDate = day + "_" + month + "_" + year
-        const slotTime = formattedTime
+      const slotDate = day + "_" + month + "_" + year
+      const slotTime = formattedTime
 
-        const isSlotAvailable = teacherInfo.slotes_booked[slotDate] &&
-          teacherInfo.slotes_booked[slotDate].includes(slotTime)
+      const isSlotAvailable =
+        teacherInfo.slotes_booked[slotDate] &&
+        teacherInfo.slotes_booked[slotDate].includes(slotTime)
           ? false
           : true
 
-        if (isSlotAvailable) {
-          timeSlots.push({
-            dateTime: new Date(currentDate),
-            time: formattedTime
-          })
-        }
-
-        currentDate.setMinutes(currentDate.getMinutes() + 30)
+      if (isSlotAvailable) {
+        timeSlots.push({
+          dateTime: new Date(currentDate),
+          time: formattedTime
+        })
       }
 
-      setTeacherSlot(prev => ([...prev, timeSlots]))
+      // ✅ Increment by 1 hour instead of 30 minutes
+      currentDate.setHours(currentDate.getHours() + 1)
     }
+
+    setTeacherSlot(prev => [...prev, timeSlots])
   }
+}
+
 
   const bookedAppointment = async () => {
     if (!token) {
